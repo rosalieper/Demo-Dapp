@@ -1,8 +1,15 @@
+//sending from one to zero
+//destination id is sent from the android ui
+//the sender id is from the text file saved on the server
+
 var StellarSdk = require('stellar-sdk');
+var fs = require('fs');
+var path = require('path');
+
 StellarSdk.Network.useTestNetwork();
 var server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
 var sourceKeys = StellarSdk.Keypair
-  .fromSecret('SCZANGBA5YHTNYVVV4C3U252E2B6P6F5T3U6MM63WBSBZATAQI3EBTQ4');
+  .fromSecret(getPrivateKey('keys2.txt'));
 var destinationId = 'GA2C5RFPE6GCKMY3US5PAB6UZLKIGSPIUKSLRB6Q723BM2OARMDUYEJ5';
 // Transaction will hold a built transaction we can resubmit if the result is unknown.
 var transaction;
@@ -47,3 +54,10 @@ server.loadAccount(destinationId)
     // already built transaction:
     // server.submitTransaction(transaction);
   });
+
+  function GetPrivateKey(filename){
+
+    var contents= fs.readFileSync(filename);
+    var res = contents.split("\n");
+    return res[0];
+}
