@@ -10,7 +10,7 @@ StellarSdk.Network.useTestNetwork();
 var server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
 var sourceKeys = StellarSdk.Keypair
   .fromSecret(getPrivateKey('keys2.txt'));
-var destinationId = 'GA2C5RFPE6GCKMY3US5PAB6UZLKIGSPIUKSLRB6Q723BM2OARMDUYEJ5';
+var destinationId = 'GCXEGAU4GMLTYWMJPOIHCHMIIHWSK72ULZP3PD37TCLEWQDR7BIV3VEK';
 // Transaction will hold a built transaction we can resubmit if the result is unknown.
 var transaction;
 
@@ -55,9 +55,12 @@ server.loadAccount(destinationId)
     // server.submitTransaction(transaction);
   });
 
-  function GetPrivateKey(filename){
+  function getPrivateKey(filename){
 
-    var contents= fs.readFileSync(filename);
+    var buffer= fs.readFileSync(filename);
+    //convert buffer to string
+    contents= buffer.toString();
     var res = contents.split("\n");
+    console.log(res[0]);
     return res[0];
 }
