@@ -11,6 +11,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.rosalie.myapplication.api.ApiUrl;
 
 
 public class GenerateActivity extends AppCompatActivity {
@@ -21,8 +22,7 @@ public class GenerateActivity extends AppCompatActivity {
         final TextView mTextView =  findViewById(R.id.textView2);
         //Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(GenerateActivity.this);
-        //TODO: Change the url variable to use the default in the api package folder
-        String url ="http://192.168.8.102:3000/create_account";
+        String url =ApiUrl.URL_GENERATE;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

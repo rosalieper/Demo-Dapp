@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-
+    //when send button clicked
     public void onSend( View v){
         Intent intObj = new Intent(MainActivity.this, SendActivity.class);
         TextView message = (TextView) findViewById(R.id.editText2);
@@ -21,11 +21,12 @@ public class MainActivity extends AppCompatActivity {
         intObj.putExtra("AMOUNT", amount);
         startActivity(intObj);
     }
+    //when recieve button clicked
     public void onRecieve(View v){
         Intent intObj = new Intent(MainActivity.this, RecieveActivity.class);
         startActivity(intObj);
     }
-
+    //when generate button clicked
     public void onGenerate(View v){
         Intent intent = new Intent(MainActivity.this, GenerateActivity.class);
         startActivity(intent);

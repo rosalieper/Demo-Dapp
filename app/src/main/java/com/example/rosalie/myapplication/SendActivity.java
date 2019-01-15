@@ -41,17 +41,15 @@ public class SendActivity extends AppCompatActivity {
         Button button = (Button) findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Do something in response to button click
+                // make transaction on click event
                 RequestQueue queue = Volley.newRequestQueue(SendActivity.this);
-                //TODO: replace the variable url with the ones available in ApiUrl
-                String url = "http://192.168.8.102:3000/send";
+                String url = ApiUrl.URL_SEND;
                 StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>()
                         {
                             @Override
                             public void onResponse(String response) {
-                                // response
-                                //TODO: Get the string from the response and display it on a new intent
+                                // display response message on a new activity
                                 Intent intObj = new Intent(SendActivity.this, EndActivity.class);
                                 intObj.putExtra("RESPONSE", response);
                                 startActivity(intObj);
@@ -75,7 +73,7 @@ public class SendActivity extends AppCompatActivity {
                     protected Map<String, String> getParams()
                     {
                         Map<String, String>  parameters = new HashMap<String, String>();
-                        //TODO: get the parameters from the user input. amount and adress.
+                        //get parameters from user input
                         parameters.put("amount", ApiUrl.amount);
                         parameters.put("address", ApiUrl.adress);
 

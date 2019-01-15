@@ -11,6 +11,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.rosalie.myapplication.api.ApiUrl;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,8 +26,7 @@ public class RecieveActivity extends AppCompatActivity {
         final TextView mTextView = (TextView) findViewById(R.id.textView4);
         //Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(RecieveActivity.this);
-        //TODO: Change the url variable to use the default in the api package folder
-        String url ="http://192.168.8.102:3000/recieve";
+        String url =ApiUrl.URL_GET_KEY;
 
        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
