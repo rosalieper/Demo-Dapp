@@ -21,6 +21,7 @@ server.listen(port, (err) => {
 const express = require('express')
 var recieve = require('./recieve')
 var create_account = require('./create_account')
+var send = require('./send0-1')
 const app = express()
 const port = 3000
 
@@ -36,8 +37,10 @@ app.get('/recieve', (request, response) => {
   response.json({key: recieve.getKey('keys2.txt')})
 })
 
-app.get('/send0-1', (request, response) => {
-  response.send('Hello from send0-1!')
+app.post('/send', (request, response) => {
+	var post=request.body;
+	console.log(post);
+  response.send(send.transaction(post.amount, post.address))
 })
 
 app.listen(port, (err) => {

@@ -1,7 +1,6 @@
 package com.example.rosalie.myapplication;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -12,13 +11,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.rosalie.myapplication.api.ApiUrl;
-import com.example.rosalie.myapplication.api.RequestHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
 
 public class RecieveActivity extends AppCompatActivity {
     //Instantiate the RequestQueue.
@@ -31,7 +26,7 @@ public class RecieveActivity extends AppCompatActivity {
         //Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(RecieveActivity.this);
         //TODO: Change the url variable to use the default in the api package folder
-        String url ="http://192.168.8.103:3000/recieve";
+        String url ="http://192.168.8.102:3000/recieve";
 
        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -63,6 +58,7 @@ public class RecieveActivity extends AppCompatActivity {
     }
 
     public void onClick(){
+        //TODO: move back to main activity
         Intent intObj = new Intent(RecieveActivity.this, MainActivity.class);
         startActivity(intObj);
     }
