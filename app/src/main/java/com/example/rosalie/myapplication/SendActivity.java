@@ -10,32 +10,33 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.rosalie.myapplication.api.ApiUrl;
 
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class SendActivity extends AppCompatActivity {
-    String amount;
-    String adress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send);
 
         Intent intent = getIntent();
-        amount = intent.getStringExtra("AMOUNT");
+        ApiUrl.amount = intent.getStringExtra("AMOUNT");
         EditText editText = findViewById(R.id.editText3);
-        adress = editText.getText().toString();
+        ApiUrl.adress = editText.getText().toString();
 
         TextView textView = findViewById(R.id.textView6);
-        textView.setText(amount);
+        textView.setText(ApiUrl.amount);
 
         Button button = (Button) findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
@@ -65,21 +66,30 @@ public class SendActivity extends AppCompatActivity {
                                 Intent intObj = new Intent(SendActivity.this, EndActivity.class);
                                 intObj.putExtra("RESPONSE", error.toString());
                                 startActivity(intObj);
-                                Log.d("ERROR.Response", error.toString());
+                                Log.e("ERROR.Responses", error.toString());
                             }
                         }
                 ) {
+
                     @Override
                     protected Map<String, String> getParams()
                     {
-                        Map<String, String>  params = new HashMap<String, String>();
+                        Map<String, String>  parameters = new HashMap<String, String>();
                         //TODO: get the parameters from the user input. amount and adress.
-                        params.put("amount", amount);
-                        params.put("address", adress);
-                        Log.d("AMOUNT", amount);
-                        Log.d("ADDRESS", adress);
+                        parameters.put("amount", ApiUrl.amount);
+                        parameters.put("address", ApiUrl.adress);
 
-                        return params;
+                        Log.e("AMOUNT you just input", ApiUrl.amount);
+                        Log.e("ADDRESS you just input", ApiUrl.adress);
+
+                        return parameters;
+                    }
+
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String,String> parameters = new HashMap<String, String>();
+                        parameters.put("Content-Type","application/x-www-form-urlencoded");
+                        return parameters;
                     }
                 };
                 queue.add(postRequest);

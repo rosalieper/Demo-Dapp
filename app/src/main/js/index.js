@@ -39,7 +39,7 @@ app.get('/recieve', (request, response) => {
 
 app.post('/send', (request, response) => {
 	var post=request.body;
-	console.log(post);
+	console.log(request);
   response.send(send.transaction(post.amount, post.address))
 })
 
