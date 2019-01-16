@@ -1,6 +1,5 @@
 package com.example.rosalie.myapplication;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,6 +16,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rosalie.myapplication.api.ApiUrl;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,8 +33,7 @@ public class SendActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         ApiUrl.amount = intent.getStringExtra("AMOUNT");
-        EditText editText = findViewById(R.id.editText3);
-        ApiUrl.adress = editText.getText().toString();
+
 
         TextView textView = findViewById(R.id.textView6);
         textView.setText(ApiUrl.amount);
@@ -45,19 +45,26 @@ public class SendActivity extends AppCompatActivity {
                 RequestQueue queue = Volley.newRequestQueue(SendActivity.this);
                 String url = ApiUrl.URL_SEND;
                 StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                        new Response.Listener<String>()
-                        {
+                        new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                // display response message on a new activity
-                                Intent intObj = new Intent(SendActivity.this, EndActivity.class);
-                                intObj.putExtra("RESPONSE", response);
-                                startActivity(intObj);
-                                Log.d("Response", response);
+                                try {
+                                    //convert response to a json object
+                                    JSONObject resObj = new JSONObject(response);
+                                    //get the value of the key index in string formate
+                                    String res = resObj.getString("key");
+                                    //display the key
+                                    // display response message on a new activity
+                                    Intent intObj = new Intent(SendActivity.this, EndActivity.class);
+                                    intObj.putExtra("RESPONSE", res);
+                                    startActivity(intObj);
+                                    Log.d("Response", res);
+                                }catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         },
-                        new Response.ErrorListener()
-                        {
+                        new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 // error
@@ -70,31 +77,33 @@ public class SendActivity extends AppCompatActivity {
                 ) {
 
                     @Override
-                    protected Map<String, String> getParams()
-                    {
-                        Map<String, String>  parameters = new HashMap<String, String>();
-                        //get parameters from user input
-                        parameters.put("amount", ApiUrl.amount);
-                        parameters.put("address", ApiUrl.adress);
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<String, String>();
+                        //get the adress from the input
+                        EditText editText = findViewById(R.id.editText3);
+                        ApiUrl.adress = editText.getText().toString();
+                        //store parameters from user input in object
+                        params.put("amount", ApiUrl.amount);
+                        params.put("address", ApiUrl.adress);
+                        //debugging
+                        Log.e("PARAMS", params.toString());
 
-                        Log.e("AMOUNT you just input", ApiUrl.amount);
-                        Log.e("ADDRESS you just input", ApiUrl.adress);
-
-                        return parameters;
+                        return params;
                     }
 
-                    @Override
+                    /*@Override
                     public Map<String, String> getHeaders() throws AuthFailureError {
-                        Map<String,String> parameters = new HashMap<String, String>();
-                        parameters.put("Content-Type","application/x-www-form-urlencoded");
-                        return parameters;
-                    }
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("Accept","application/json");
+                        params.put("Content-Type","application/json");
+                        return params;
+                    }*/
                 };
+                Log.e("POST", postRequest.toString());
                 queue.add(postRequest);
             }
         });
 
     }
-
-
 }
+

@@ -13,8 +13,8 @@ module.exports = {
     var server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
     var sourceKeys = StellarSdk.Keypair
       .fromSecret(getPrivateKey('keys2.txt'));
-    //var destinationId = 'GCXEGAU4GMLTYWMJPOIHCHMIIHWSK72ULZP3PD37TCLEWQDR7BIV3VEK';
-    var destinationId = adress;
+    var destinationId = 'GCXEGAU4GMLTYWMJPOIHCHMIIHWSK72ULZP3PD37TCLEWQDR7BIV3VEK';
+   // var destinationId = adress;
     // Transaction will hold a built transaction we can resubmit if the result is unknown.
     var transaction;
 
@@ -38,8 +38,8 @@ module.exports = {
             // Because Stellar allows transaction in many currencies, you must
             // specify the asset type. The special "native" asset represents Lumens.
             asset: StellarSdk.Asset.native(),
-            //amount: "10"
-            amount: amount
+            amount: "10"
+            //amount: amount.toString
           }))
           // A memo allows you to add your own metadata to a transaction. It's
           // optional and does not affect how Stellar treats the transaction.
@@ -53,6 +53,7 @@ module.exports = {
       .then(function(result) {
         res = 1;
         console.log('Success! Results:', result);
+        console.log(amount);
       })
       .catch(function(error) {
         res = 0;
