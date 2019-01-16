@@ -25,7 +25,8 @@ app.post('/send', (request, response) => {
 	var post=request.body
 	if(post.amount){
 		console.log(post.amount)
-  		response.send(send.transaction(post.amount, post.address))	
+		var message = send.transaction(post.amount, post.address)
+  		response.json({message: message+post.amount+" XLM sent to "+post.address})	
 	}
 	else{
 		response.json({message: "Sorry Error 500: Parameters missing"})

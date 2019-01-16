@@ -16,14 +16,15 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="416dp"
+            android:layout_height="354dp"
             app:srcCompat="@android:drawable/btn_star_big_on" />
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="match_parent"
+            android:layout_width="358dp"
             android:layout_height="wrap_content"
-            android:text='You have sent "X" xlm to "adress"' />
+            android:text='You have sent "X" xlm to "adress"'
+            android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
         <Button
             android:id="@+id/button5"

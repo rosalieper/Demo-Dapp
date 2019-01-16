@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     //when send button clicked
     public void onSend( View v){
         Intent intObj = new Intent(MainActivity.this, SendActivity.class);
-        TextView message = (TextView) findViewById(R.id.editText2);
+        TextView message = (TextView) findViewById(R.id.editText);
         String amount = message.getText().toString();
         intObj.putExtra("AMOUNT", amount);
         startActivity(intObj);

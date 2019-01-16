@@ -52,7 +52,7 @@ public class SendActivity extends AppCompatActivity {
                                     //convert response to a json object
                                     JSONObject resObj = new JSONObject(response);
                                     //get the value of the key index in string formate
-                                    String res = resObj.getString("key");
+                                    String res = resObj.getString("message");
                                     //display the key
                                     // display response message on a new activity
                                     Intent intObj = new Intent(SendActivity.this, EndActivity.class);
