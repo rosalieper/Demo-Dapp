@@ -1,7 +1,10 @@
-//sending from one to zero
+//sending from account one to zero
 //destination id is sent from the android ui
 //the sender id is from the text file saved on the server
-
+/*
+  !!!!--------------IMPORTANT READ---------------!!!!
+  This file is not used in the project check the send1-0.js for the send functionalities
+*/
 var StellarSdk = require('stellar-sdk');
 var fs = require('fs');
 var path = require('path');
@@ -15,14 +18,15 @@ module.exports = {
       .fromSecret(getPrivateKey('keys2.txt'));
     var destinationId = 'GCXEGAU4GMLTYWMJPOIHCHMIIHWSK72ULZP3PD37TCLEWQDR7BIV3VEK';
     var amount = amounts;
-   // var destinationId = adress;
+    //var destinationId = adress;
+    var balance_amt;
     // Transaction will hold a built transaction we can resubmit if the result is unknown.
     var transaction;
 
     // First, check to make sure that the destination account exists.
     // You could skip this, but if the account does not exist, you will be charged
     // the transaction fee when the transaction fails.
-    if(server.loadAccount('GCXEGAU4GMLTYWMJPOIHCHMIIHWSK72ULZP3PD37TCLEWQDR7BIV3VEK', amount)
+    if(server.loadAccount('GCXEGAU4GMLTYWMJPOIHCHMIIHWSK72ULZP3PD37TCLEWQDR7BIV3VEK')
       // If the account is not found, surface a nicer error message for logging.
       .catch(StellarSdk.NotFoundError, function (error) {
         throw new Error('The destination account does not exist!');
@@ -56,6 +60,13 @@ module.exports = {
       .then(function(result) {
         res = 1;
         console.log('Success! Results');
+        server.loadAccount(getPublicKey("keys2.txt")).then(function(account) {
+          console.log('Balances for account: ' + getPublicKey("keys2.txt"));
+          account.balances.forEach(function(balance) {
+            balance_amt = balance.balance;
+            console.log('Type:', balance.asset_type, ', Balance:', balance_amt);
+          });
+        });
       })
       .catch(function(error) {
         res = 0;
@@ -66,18 +77,13 @@ module.exports = {
         return "Something went wrong, Sorry! PLease check the address again.";
       }))
     {
-      server.loadAccount(getPublicKey("keys2.txt")).then(function(account) {
-        console.log('Balances for account: ' + getPublicKey("keys2.txt"));
-        account.balances.forEach(function(balance) {
-          console.log('Type:', balance.asset_type, ', Balance:', balance.balance);
-        });
-      });
         console.log("QQQQQQQQQQQQQQQQQQQQQQQQ");
-        message = "Your transaction was succesfull. "; //You send "+ amount+" XLM to "+adress;
-        return message;
-    }else if (res == 0)
-    {
-        return "Something went wrong, Sorry! PLease check the address again.";
+        if(balance_amt){
+          message = "Your transaction was succesfull. \nYour remaining balance is: "+balance_amt+"\n"; //You send "+ amount+" XLM to "+adress;
+          return message;
+        }else{
+        return "Something went wrong, PLease check the address again.\n";
+        }
     }
   }
 }
@@ -88,15 +94,15 @@ module.exports = {
     //convert buffer to string
     contents= buffer.toString();
     var res = contents.split("\n");
-   // console.log(res[0]);
     return res[0];
 }
+
+//this function returns only the public key with no preceeding message
 function getPublicKey(filename){
       var buffer= fs.readFileSync(filename);
       //convert buffer to string
       contents= buffer.toString();
       var res = contents.split("\n");
       var key = res[1].split(" ");
-     // console.log(key[1]);
       return key[1];
   }

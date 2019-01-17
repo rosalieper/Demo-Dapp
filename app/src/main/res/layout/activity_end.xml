@@ -23,7 +23,7 @@
             android:id="@+id/textView2"
             android:layout_width="358dp"
             android:layout_height="wrap_content"
-            android:text='You have sent "X" xlm to "adress"'
+            android:text="Sorry! Some Error Occured."
             android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
         <Button
