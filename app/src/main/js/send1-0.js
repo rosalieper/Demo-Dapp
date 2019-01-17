@@ -13,9 +13,9 @@ module.exports = {
     var server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
     var sourceKeys = StellarSdk.Keypair
       .fromSecret(getPrivateKey('keys2.txt'));
-    var destinationId = 'GCXEGAU4GMLTYWMJPOIHCHMIIHWSK72ULZP3PD37TCLEWQDR7BIV3VEK';
+    //var destinationId = 'GCXEGAU4GMLTYWMJPOIHCHMIIHWSK72ULZP3PD37TCLEWQDR7BIV3VEK';
     var amount = amounts;
-   //var destinationId = adress;
+   var destinationId = adress;
     // Transaction will hold a built transaction we can resubmit if the result is unknown.
     var transaction;
 
