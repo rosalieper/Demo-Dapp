@@ -2,7 +2,7 @@
 // see more about KeyPair objects: https://stellar.github.io/js-stellar-sdk/Keypair.html
 var StellarSdk = require('stellar-sdk');
 var pair = StellarSdk.Keypair.random();
-var server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
+var server = new StellarSdk.Server('http://172.31.41.130:11626', {allowHttp: true});
 
 
 console.log(pair.secret());

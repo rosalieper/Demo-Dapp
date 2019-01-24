@@ -13,7 +13,7 @@ module.exports = {
   transaction: function (amounts, adress){
     let res;
     StellarSdk.Network.useTestNetwork();
-    var server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
+    var server = new StellarSdk.Server('http://172.31.41.130:11626', {allowHttp: true});
     var sourceKeys = StellarSdk.Keypair
       .fromSecret(getPrivateKey('keys2.txt'));
     var destinationId = 'GCXEGAU4GMLTYWMJPOIHCHMIIHWSK72ULZP3PD37TCLEWQDR7BIV3VEK';
