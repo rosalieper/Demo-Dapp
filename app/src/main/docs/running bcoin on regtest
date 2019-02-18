@@ -1,0 +1,42 @@
+#Running bcoin on regtest
+===============================
+//this documentation is for regtest network for the main network just runing bcoin runs the network automaticaly. you may need
+//to create a bcoin.conf in ~/.bcoin, but that I think could be optional in most cases.
+
+-creat a regtest directory in ~/.bcoin
+-create a bcoin.conf file and paste your configurations in. 
+	-sample configuration could be:
+
+		network: regtest
+		wallet-auth: true
+		api-key: api-key
+		http-host: 0.0.0.0
+
+	-see https://bcoin.io/api-docs/index.html?shell--curl#configuration for more info
+- start bcoin on retest by runing : bcoin --network=regtest --api-key=menace --daemon
+	-see https://github.com/bcoin-org/bcoin/blob/master/docs/Configuration.md for more info
+
+-You can enjoy your connections working!!! :D
+
+#Testing and using the network
+=============================
+//note:: this doc will use cURL for the explaination but it should normally also work for nodejs :)
+
+##Cheking existing wallets on the regtest network
+================================================
+
+
+-curl http://x:7f79b642d2f425df569d8052f0b25967b9bed4431dac3a7cfad1c296c3546acc@127.0.0.1:48334/wallet
+
+##Cheking wallet info
+============================
+//select depending on the info needed
+
+-curl http://x:7f79b642d2f425df569d8052f0b25967b9bed4431dac3a7cfad1c296c3546acc@127.0.0.1:48334/wallet/$id
+-curl http://x:7f79b642d2f425df569d8052f0b25967b9bed4431dac3a7cfad1c296c3546acc@127.0.0.1:48334/wallet/$id/master
+
+##Checking for more na d doing more
+=====================================
+-For more info see the bcoin documentation page: https://bcoin.io/api-docs/index.html#introduction
+-Hopefully if you read and understand the docs you won't face any problemes :D
+-Enjoy!

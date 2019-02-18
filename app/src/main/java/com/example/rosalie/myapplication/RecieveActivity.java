@@ -3,6 +3,7 @@ package com.example.rosalie.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -47,6 +48,7 @@ public class RecieveActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 mTextView.setText("That didn't work!");
+                Log.e("ERROR", error.toString());
             }
         });
         // Add the request to the RequestQueue.

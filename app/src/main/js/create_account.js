@@ -16,7 +16,7 @@ create_account: function (){
 	// GCFXHS4GXL6BVUCXBWXGTITROWLVYXQKQLF4YH5O5JT3YZXCYPAFBJZB
 
 	//saving the keys to a file
-	fs.writeFile("keys2.txt", secretKey+"\npublicKey: "+publicKey, function(err) {
+	fs.writeFile("keys.txt", secretKey+"\npublicKey: "+publicKey, function(err) {
 	    if(err) {
 	        return console.log(err);
 	    }

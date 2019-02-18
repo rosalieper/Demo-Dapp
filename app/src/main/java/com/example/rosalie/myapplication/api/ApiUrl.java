@@ -2,7 +2,7 @@ package com.example.rosalie.myapplication.api;
 
 public class ApiUrl {
 
-    private static final String ROOT_URL = "http://192.168.8.102:3000/";
+    private static final String ROOT_URL = "http://192.168.8.104:3000/";
 
     //global variable for the send option
     public static String amount;
