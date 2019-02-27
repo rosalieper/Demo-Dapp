@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">Nzinghaa</string>
+    <string name="store_asset">
+Store Asset Securely
+</string>
+    <string name="nzinghaa_al">
+Nzinghaa allow you to store, send and receive cryptocurrency and fiat money securely and easily
+</string>
+    <string name="skip">
+skip
+</string>
+    <string name="instant_cry">
+Instant Crypto Exchange
+</string>
+    <string name="use_our_sec">
+Use our securely decentralised hybrid exchange to easily trade digital asset with the lowest Market fees
+</string>
+    <string name="trusted_gif">
+Trusted Gift Marketplace
+</string>
+    <string name="nothing_is_">
+Nothing is better than a gift to give a smile. Use Nzinghaa App to send airtime or coupon code to those you love.
+</string>
+    <string name="we_first_ne">
+We first need to know your email address (Do\u00E2\u0080\u0099nt worry  we will never spam you :) :
+</string>
+<string name="email">
+Email
+</string>
 </resources>
