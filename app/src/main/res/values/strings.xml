@@ -35,4 +35,6 @@ Now to give you a best offer, we need to know your country:
 You just have to add your mobile phone number and begin to use Nzinghaa Wallet App.
 </string>
     <string name="phone">Phone number</string>
+    <string name="create_account">Create Account</string>
+    <string name="password">Password</string>
 </resources>
